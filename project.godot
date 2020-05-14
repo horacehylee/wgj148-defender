@@ -1,0 +1,60 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="wgj148"
+run/main_scene="res://scenes/Game.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+global="*res://scenes/global.gd"
+
+[display]
+
+window/size/width=256
+window/size/height=256
+window/size/test_width=768
+window/size/test_height=768
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[input]
+
+restart={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="wall"
+2d_physics/layer_2="earth"
+2d_physics/layer_3="paddle_r"
+2d_physics/layer_4="paddle_b"
+2d_physics/layer_5="enemy_r"
+2d_physics/layer_6="enemy_b"
+2d_physics/layer_7="bullet_r"
+2d_physics/layer_8="bullet_b"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+quality/2d/use_pixel_snap=true
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"

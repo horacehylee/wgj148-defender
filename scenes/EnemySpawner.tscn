@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/enemy_spawner.gd" type="Script" id=1]
+[ext_resource path="res://assets/warn_r.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://assets/warn_b.tres" type="SpriteFrames" id=3]
+
+[node name="EnemySpawner" type="Position2D"]
+script = ExtResource( 1 )
+sprites = [ ExtResource( 2 ), ExtResource( 3 ) ]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,0 +1,207 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/background-purple.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Earth.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/level.gd" type="Script" id=3]
+[ext_resource path="res://scenes/paddle_controller.gd" type="Script" id=4]
+[ext_resource path="res://scenes/orbit_detector.gd" type="Script" id=5]
+[ext_resource path="res://vfx/ScreenShake.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/m6x11.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/Paddle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/RestartLabel.gd" type="Script" id=9]
+[ext_resource path="res://scenes/WinLabel.gd" type="Script" id=10]
+[ext_resource path="res://scenes/DeadLabel.gd" type="Script" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 142.134 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+outline_size = 1
+extra_spacing_char = 1
+font_data = ExtResource( 7 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 81.8618
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 8.92783
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+process_mode = 0
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 6 )]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 1 )
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="Walls" groups=[
+"walls",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
+position = Vector2( -136, 0 )
+shape = SubResource( 1 )
+
+[node name="Wall2" type="StaticBody2D" parent="Walls" groups=[
+"walls",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+position = Vector2( 137, 0 )
+shape = SubResource( 1 )
+
+[node name="Wall3" type="StaticBody2D" parent="Walls" groups=[
+"walls",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
+position = Vector2( 0, 137 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Wall4" type="StaticBody2D" parent="Walls" groups=[
+"walls",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
+position = Vector2( 8, -137 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Level" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Level"]
+pause_mode = 2
+layer = 2
+follow_viewport_enable = true
+
+[node name="RestartLabel" type="Label" parent="Level/CanvasLayer"]
+visible = false
+margin_left = -33.0
+margin_top = -67.0
+margin_right = 99.0
+margin_bottom = -53.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 4 )
+text = "Press \"R\" to restart"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeadLabel" type="Label" parent="Level/CanvasLayer"]
+visible = false
+margin_left = -60.0
+margin_top = -95.0
+margin_right = 181.0
+margin_bottom = -64.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 4 )
+text = "Game Over!
+You have failed to defend the Earth :'("
+align = 1
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinLabel" type="Label" parent="Level/CanvasLayer"]
+visible = false
+margin_left = -40.0
+margin_top = -100.0
+margin_right = 120.0
+margin_bottom = -52.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 4 )
+text = "Congradulation!!
+You have defended Earth
+from the Space Invaders!"
+align = 1
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeLabel" type="Label" parent="Level/CanvasLayer"]
+margin_left = -5.0
+margin_top = -4.0
+margin_right = 10.0
+margin_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+text = "60"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemySpawnerPosition" type="Position2D" parent="Level"]
+position = Vector2( 0, -119 )
+
+[node name="WaveTimer" type="Timer" parent="Level"]
+one_shot = true
+
+[node name="SpawnDelayTimer" type="Timer" parent="Level"]
+one_shot = true
+
+[node name="CountDownTimer" type="Timer" parent="Level"]
+autostart = true
+
+[node name="Earth" parent="." instance=ExtResource( 2 )]
+
+[node name="PaddleController" type="Node2D" parent="Earth"]
+script = ExtResource( 4 )
+
+[node name="Paddle" parent="Earth/PaddleController" instance=ExtResource( 8 )]
+position = Vector2( 0, -21 )
+
+[node name="Paddle2" parent="Earth/PaddleController" instance=ExtResource( 8 )]
+position = Vector2( 0, 21 )
+rotation = 3.14159
+type_index = 1
+
+[node name="OrbitDetector" type="Node2D" parent="Earth"]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="OuterArea" type="Area2D" parent="Earth/OrbitDetector"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/OrbitDetector/OuterArea"]
+shape = SubResource( 2 )
+
+[node name="InnerArea" type="Area2D" parent="Earth/OrbitDetector"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/OrbitDetector/InnerArea"]
+rotation = 0.523598
+shape = SubResource( 3 )
+[connection signal="timeout" from="Level/WaveTimer" to="Level" method="_on_WaveTimer_timeout"]
+[connection signal="timeout" from="Level/SpawnDelayTimer" to="Level" method="_on_SpawnDelayTimer_timeout"]
+[connection signal="timeout" from="Level/CountDownTimer" to="Level" method="_on_CountDownTimer_timeout"]
+[connection signal="mouse_drag_started" from="Earth/OrbitDetector" to="Earth/PaddleController" method="_on_OrbitDetector_mouse_drag_started"]
+[connection signal="mouse_dragged" from="Earth/OrbitDetector" to="Earth/PaddleController" method="_on_OrbitDetector_mouse_dragged"]
+[connection signal="input_event" from="Earth/OrbitDetector/OuterArea" to="Earth/OrbitDetector" method="_on_OuterArea_input_event"]
+[connection signal="mouse_exited" from="Earth/OrbitDetector/OuterArea" to="Earth/OrbitDetector" method="_on_OuterArea_mouse_exited"]
+[connection signal="mouse_entered" from="Earth/OrbitDetector/InnerArea" to="Earth/OrbitDetector" method="_on_InnerArea_mouse_entered"]
+[connection signal="mouse_exited" from="Earth/OrbitDetector/InnerArea" to="Earth/OrbitDetector" method="_on_InnerArea_mouse_exited"]
