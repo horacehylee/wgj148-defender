@@ -20,11 +20,7 @@ const GROUP_EARTH = "earth"
 const GROUP_PADDLES = "paddles"
 const GROUP_ENEMIES = "enemies"
 
-onready var camera = $"/root/Node2D/Camera2D"
-onready var screen_shake = camera.get_node("ScreenShake")
-
 func _ready():
-	print(screen_shake.name)
 	randomize()
 	
 var dead = false
@@ -36,4 +32,4 @@ func restart():
 	get_tree().reload_current_scene()
 	
 func shake(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
-	screen_shake.start(duration, frequency, amplitude, priority)
+	$"/root/Node2D/Camera2D/ScreenShake".start(duration, frequency, amplitude, priority)

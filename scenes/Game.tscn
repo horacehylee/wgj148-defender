@@ -15,19 +15,19 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 142.134 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 outline_size = 1
 extra_spacing_char = 1
 font_data = ExtResource( 7 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=4]
 radius = 81.8618
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 8.92783
+[sub_resource type="CircleShape2D" id=5]
+radius = 0.01
 
 [node name="Node2D" type="Node2D"]
 
@@ -95,7 +95,7 @@ margin_top = -67.0
 margin_right = 99.0
 margin_bottom = -53.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Press \"R\" to restart"
 script = ExtResource( 9 )
 __meta__ = {
@@ -109,7 +109,7 @@ margin_top = -95.0
 margin_right = 181.0
 margin_bottom = -64.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Game Over!
 You have failed to defend the Earth :'("
 align = 1
@@ -125,7 +125,7 @@ margin_top = -100.0
 margin_right = 120.0
 margin_bottom = -52.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Congradulation!!
 You have defended Earth
 from the Space Invaders!"
@@ -143,7 +143,7 @@ margin_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.7, 0.7 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
@@ -189,13 +189,13 @@ __meta__ = {
 [node name="OuterArea" type="Area2D" parent="Earth/OrbitDetector"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/OrbitDetector/OuterArea"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="InnerArea" type="Area2D" parent="Earth/OrbitDetector"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/OrbitDetector/InnerArea"]
 rotation = 0.523598
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 [connection signal="timeout" from="Level/WaveTimer" to="Level" method="_on_WaveTimer_timeout"]
 [connection signal="timeout" from="Level/SpawnDelayTimer" to="Level" method="_on_SpawnDelayTimer_timeout"]
 [connection signal="timeout" from="Level/CountDownTimer" to="Level" method="_on_CountDownTimer_timeout"]

@@ -92,18 +92,18 @@ const WAVES = [
 	# 46
 	{
 		"time": 8,
-		"delay": 1.2,
+		"delay": 1,
 		"spawns": [
-			[18, 1],
+			[18, 0],
 			[30, 0],
 			[42, 1],
-			[6, 0]
+			[6, 1]
 		]
 	},
 	# 56
 	{
 		"time": 8,
-		"delay": 1.2,
+		"delay": 1,
 		"spawns": [
 			[26, 0],
 			[28, 0],
@@ -113,7 +113,7 @@ const WAVES = [
 	},
 	{
 		"time": 8,
-		"delay": 1.2,
+		"delay": 1,
 		"spawns": [
 			[22, 1],
 			[20, 1],
@@ -131,7 +131,7 @@ const WAVES = [
 		]
 	},
 	{
-		"time": 4,
+		"time": 1,
 		"delay": 0.01,
 		"spawns": [
 			[0, 1],
@@ -148,7 +148,7 @@ const WAVES = [
 		]
 	},
 	{
-		"time": 3,
+		"time": 1,
 		"delay": 0.01,
 		"spawns": [
 			[0, 0],

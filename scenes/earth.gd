@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 export(Array, Color) var tints
-export var max_health = 5
+export var max_health = 3
 var health = max_health setget _set_health
 
 signal hit()
